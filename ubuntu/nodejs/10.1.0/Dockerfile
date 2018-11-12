@@ -135,6 +135,11 @@ RUN set -ex \
 		&& ln -s /usr/local/bin/node /usr/local/bin/nodejs \
 		&& rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN sudo apt-get update && sudo apt-get install yarn
+
 RUN npm set unsafe-perm true
 
 CMD [ "node" ]
